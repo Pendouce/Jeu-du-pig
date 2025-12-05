@@ -1,0 +1,170 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+* {
+  text-transform: uppercase;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+// Layout principal
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.row {
+  background: linear-gradient(
+    to right,
+    #f0f0f0 0%,
+    #f0f0f0 50%,
+    white 50%,
+    white 100%
+  );
+  display: flex;
+  justify-content: space-around;
+  min-height: 60vh;
+  width: 90%;
+  gap: 0;
+}
+
+// Colonnes players
+.player {
+  flex: 1;
+  text-align: center;
+  align-content: center;
+  padding: 30px;
+  //background: #f8f9fa;
+  border-radius: 10px;
+  gap: 50px;
+}
+
+// Colonne centrale (dé)
+.colD {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+.colD .actionColD {
+  display: flex;
+  justify-content: space-around;
+}
+.actionColD:first-child {
+  justify-content: start;
+}
+
+.colD button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
+.dice {
+  font-size: 5rem; // Taille du dé
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+i {
+  color: #e74c3c;
+}
+
+// Scores
+.score {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #e74c3c;
+  margin: 20px 0;
+}
+
+// Current score
+.current {
+  background: #3498db;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// ... ton CSS existant ...
+
+// ========== MEDIA QUERIES ==========
+
+// Tablettes (écrans moyens)
+@media (max-width: 992px) {
+  .container {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .row {
+    gap: 20px;
+    background: linear-gradient(#f0f0f0 0%, #f0f0f0 50%, white 50%, white 100%);
+  }
+
+  .score {
+    font-size: 3rem;
+  }
+
+  .player {
+    padding: 20px;
+  }
+}
+
+// Tablettes portrait et grands mobiles
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .player,
+  .colD {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .score {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+// Petits mobiles
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+  }
+
+  .score {
+    font-size: 2rem;
+  }
+
+  .player {
+    padding: 15px;
+  }
+
+  .current {
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+}
