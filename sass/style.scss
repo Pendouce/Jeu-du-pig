@@ -12,9 +12,12 @@ html {
 
 // Layout principal
 .container {
+  background: linear-gradient(#e66465, #9198e5);
   display: flex;
-  justify-content: space-between;
+  text-align: center;
+  justify-content: center;
   align-items: center;
+  //align-content: center;
   min-height: 100vh;
 }
 
@@ -27,7 +30,9 @@ html {
     white 100%
   );
   display: flex;
+  justify-items: center;
   justify-content: space-around;
+  padding: 60px;
   min-height: 60vh;
   width: 90%;
   gap: 0;
@@ -43,7 +48,7 @@ html {
   padding: 30px;
   //background: #f8f9fa;
   border-radius: 10px;
-  gap: 30px;
+  gap: 60px;
 }
 
 // Colonne centrale (dé)
@@ -53,7 +58,7 @@ html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 50px;
+  gap: 55px;
 }
 
 .colD .actionColD {
