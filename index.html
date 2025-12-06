@@ -38,13 +38,13 @@
               <i class="bi bi-dice-1"></i>
             </div>
             <div class="actionColD">
-              <button id="restart" type="button">
+              <button id="rollDice" type="button">
                 <i class="bi bi-arrow-repeat"></i>
               </button>
               <h4>roll dice</h4>
             </div>
             <div class="actionColD">
-              <button id="restart" type="button">
+              <button id="hold" type="button">
                 <i class="bi bi-save2"></i>
               </button>
               <h4>hold</h4>
@@ -66,5 +66,64 @@
         </div>
       </div>
     </section>
+
+    <!-- LANCE DE DE -->
+
+    <script>
+      const rollBtn = document.getElementById("rollDice");
+      const de = document.getElementById("dice");
+      let scoreP1 = document.getElementById("currentP1");
+      let scoreGlobalP1 = document.getElementById("scoreP1");
+      let scoreP2 = document.getElementById("currentP2");
+      let scoreGlobalP2 = document.getElementById("scoreP2");
+      /* MODELES */
+      /* 1 */
+      class Player {
+        constructor(num) {
+          this.num = num;
+          this.score = 0;
+          this.globalScore = 0;
+        }
+      }
+      /* 2 */
+      class Jeu {
+        constructor() {
+          this.player1 = new Player(1);
+          this.player2 = new Player(2);
+          this.playerNow = this.player1;
+        }
+
+        lacerDe() {
+          const roll = Math.floor(Math.random() * 6) + 1;
+
+          if (roll === 1) {
+            this.playerNow.score = 0;
+            this.changerJoueur();
+          } else {
+            this.playerNow.score += roll;
+          }
+          return roll;
+        }
+
+        hold() {
+          this.playerNow.globalScore += this.playerNow.score;
+          this.playerNow.score = 0;
+          this.changerJoueur();
+        }
+
+        changerJoueur() {
+          if (this.playerNow === this.player1) {
+            this.playerNow = this.player2;
+          } else {
+            this.playerNow = this.player1;
+          }
+        }
+      }
+
+      /* rollBtn.addEventListener("click", () => {
+        const roll = Math.floor(Math.random() * 6) + 1;
+        de.innerHTML = `<i class="bi bi-dice-${roll}"></i>`;
+      }); */
+    </script>
   </body>
 </html>

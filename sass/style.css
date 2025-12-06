@@ -12045,6 +12045,10 @@ html {
   background-color: transparent;
 }
 
+.actionColD i {
+  width: 50px;
+}
+
 .dice {
   font-size: 5rem;
   color: #333;
