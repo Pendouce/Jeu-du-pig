@@ -22,13 +22,13 @@ html {
 }
 
 .row {
-  background: linear-gradient(
+  /*   background: linear-gradient(
     to right,
     #f0f0f0 0%,
     #f0f0f0 50%,
     white 50%,
     white 100%
-  );
+  ); */
   display: flex;
   justify-items: center;
   justify-content: space-around;
@@ -36,6 +36,7 @@ html {
   min-height: 60vh;
   width: 90%;
   gap: 0;
+  transition: background 0.5s ease;
 }
 
 // Colonnes players

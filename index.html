@@ -15,15 +15,15 @@
       <div class="container">
         <div class="row">
           <!-- COLONNE PLAYER 1 -->
-          <div class="player">
+          <div id="player1" class="player">
             <div>
               <h2>Player 1</h2>
-              <div id="scoreP1" class="score">43</div>
+              <div id="scoreP1" class="score">0</div>
             </div>
 
             <div class="current">
               <p>current</p>
-              <h3 id="currentP1">11</h3>
+              <h3 id="currentP1">0</h3>
             </div>
           </div>
           <!-- COLONNE DÉ -->
@@ -52,15 +52,15 @@
           </div>
           <!-- COLONNE PLAYER 2 -->
 
-          <div class="player">
+          <div id="player2" class="player">
             <div>
               <h2>Player 2</h2>
-              <div id="scoreP2" class="score">43</div>
+              <div id="scoreP2" class="score">0</div>
             </div>
 
             <div class="current">
               <p>current</p>
-              <h3 id="currentP2">21</h3>
+              <h3 id="currentP2">0</h3>
             </div>
           </div>
         </div>
@@ -71,11 +71,8 @@
 
     <script>
       const rollBtn = document.getElementById("rollDice");
-      const de = document.getElementById("dice");
-      let scoreP1 = document.getElementById("currentP1");
-      let scoreGlobalP1 = document.getElementById("scoreP1");
-      let scoreP2 = document.getElementById("currentP2");
-      let scoreGlobalP2 = document.getElementById("scoreP2");
+      const holdBtn = document.getElementById("hold");
+      const restartBtn = document.getElementById("restart");
       /* MODELES */
       /* 1 */
       class Player {
@@ -93,7 +90,7 @@
           this.playerNow = this.player1;
         }
 
-        lacerDe() {
+        lancerDe() {
           const roll = Math.floor(Math.random() * 6) + 1;
 
           if (roll === 1) {
@@ -111,6 +108,14 @@
           this.changerJoueur();
         }
 
+        restart() {
+          this.player1.score = 0;
+          this.player1.globalScore = 0;
+          this.player2.score = 0;
+          this.player2.globalScore = 0;
+          this.playerNow = this.player1;
+        }
+
         changerJoueur() {
           if (this.playerNow === this.player1) {
             this.playerNow = this.player2;
@@ -120,6 +125,76 @@
         }
       }
 
+      /* CONTROLLER */
+      class JeuController {
+        constructor() {
+          this.model = new Jeu();
+          this.vue = new VueJeu(this.model);
+        }
+        controllLancerDe() {
+          rollBtn.addEventListener("click", () => {
+            const roll = this.model.lancerDe();
+            this.vue.majDe(roll);
+            this.vue.majScore();
+            this.vue.playerActif();
+          });
+        }
+        controllHold() {
+          holdBtn.addEventListener("click", () => {
+            this.model.hold();
+            this.vue.majScore();
+          });
+        }
+        controllRestart() {
+          restartBtn.addEventListener("click", () => {
+            this.model.restart();
+            this.vue.majScore();
+            this.vue.majDe(1);
+            this.vue.playerActif();
+          });
+        }
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        const controller = new JeuController();
+        controller.controllLancerDe();
+        controller.controllHold();
+        controller.controllRestart();
+      });
+
+      /* VUE */
+
+      class VueJeu {
+        constructor(model) {
+          this.model = model;
+
+          this.scoreP1 = document.getElementById("currentP1");
+          this.scoreGlobalP1 = document.getElementById("scoreP1");
+          this.scoreP2 = document.getElementById("currentP2");
+          this.scoreGlobalP2 = document.getElementById("scoreP2");
+          this.de = document.getElementById("dice");
+
+          this.player1 = document.getElementById("player1");
+          this.player2 = document.getElementById("player2");
+        }
+        playerActif() {
+          const row = this.dom.row;
+          row.style.background =
+            this.model.playerNow.num === 1
+              ? "linear-gradient(to right, #f0f0f0 50%, white 50%)"
+              : "linear-gradient(to right, white 50%, #f0f0f0 50%)";
+        }
+
+        majDe(roll) {
+          this.de.innerHTML = `<i class="bi bi-dice-${roll}"></i>`;
+        }
+
+        majScore() {
+          this.scoreP1.textContent = this.model.player1.score;
+          this.scoreP2.textContent = this.model.player2.score;
+          this.scoreGlobalP1.textContent = this.model.player1.globalScore;
+          this.scoreGlobalP2.textContent = this.model.player2.globalScore;
+        }
+      }
       /* rollBtn.addEventListener("click", () => {
         const roll = Math.floor(Math.random() * 6) + 1;
         de.innerHTML = `<i class="bi bi-dice-${roll}"></i>`;
