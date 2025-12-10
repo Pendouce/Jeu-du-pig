@@ -13,7 +13,7 @@
   <body>
     <section>
       <div class="container">
-        <div class="row">
+        <div id="row" class="row">
           <!-- COLONNE PLAYER 1 -->
           <div id="player1" class="player">
             <div>
@@ -172,13 +172,14 @@
           this.scoreP2 = document.getElementById("currentP2");
           this.scoreGlobalP2 = document.getElementById("scoreP2");
           this.de = document.getElementById("dice");
+          this.row = document.getElementById("row");
 
           this.player1 = document.getElementById("player1");
           this.player2 = document.getElementById("player2");
         }
         playerActif() {
-          const row = this.dom.row;
-          row.style.background =
+          //const row = this.row;
+          this.row.style.background =
             this.model.playerNow.num === 1
               ? "linear-gradient(to right, #f0f0f0 50%, white 50%)"
               : "linear-gradient(to right, white 50%, #f0f0f0 50%)";
@@ -190,7 +191,6 @@
           // force le reflow (pour relancer l'animation)
           // relance l'animation
           this.de.classList.add("roll");
-          this.de.innerHTML = `<i class="bi bi-dice-${roll}"></i>`;
         }
 
         majScore() {
