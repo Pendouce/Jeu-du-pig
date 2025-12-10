@@ -73,6 +73,7 @@
       const rollBtn = document.getElementById("rollDice");
       const holdBtn = document.getElementById("hold");
       const restartBtn = document.getElementById("restart");
+      const dice = document.getElementById("dice");
       /* MODELES */
       /* 1 */
       class Player {
@@ -92,7 +93,6 @@
 
         lancerDe() {
           const roll = Math.floor(Math.random() * 6) + 1;
-
           if (roll === 1) {
             this.playerNow.score = 0;
             this.changerJoueur();
@@ -185,6 +185,11 @@
         }
 
         majDe(roll) {
+          this.de.classList.remove("roll");
+          void this.de.offsetWidth;
+          // force le reflow (pour relancer l'animation)
+          // relance l'animation
+          this.de.classList.add("roll");
           this.de.innerHTML = `<i class="bi bi-dice-${roll}"></i>`;
         }
 
